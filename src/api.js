@@ -1,4 +1,4 @@
-const API_BASE = (import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:8000').replace(/\/+$/, '');
+const API_BASE = (import.meta.env.BACKENDMFD_API_URL || 'http://localhost:8000').replace(/\/+$/, '');
 
 async function handleResponse(res) {
   if (res.status === 204) {
