@@ -1,18 +1,83 @@
-# React + Vite
+# Patient Admission Management — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Single-page React (Vite) web application for managing hospital patient admissions, filtering, editing, discharging, and deletion.
 
-Currently, two official plugins are available:
+## Live Links
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend:** https://hostpitaladministration.vercel.app
+- **Backend API:** https://dscribe-backend.vercel.app
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend:** React, Vite, plain CSS, Fetch API
+- **Backend (separate repo):** Python, FastAPI, Pydantic ([Dscribe-backend](https://github.com/saintcoder0/Dscribe-backend))
+- **Database:** MongoDB Atlas (`pymongo`)
 
-## Expanding the Oxlint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-# Dscribe-frontend
-# Dscribe-frontend
+- Add new patient admissions via modal form with client-side and server-side validation
+- View all patients in a responsive table (desktop/tablet) or stacked cards (mobile `< 640px`)
+- Debounced name search (300 ms) combined with Ward, Department, and Doctor filters
+- Edit patient details in a modal while preserving admission status
+- Mark admitted patients as **Discharged**
+- Delete patients with a confirmation dialog
+- Dynamic dropdown options fetched from `GET /api/options`
+
+## Project Structure
+
+```text
+frontend/
+├── screenshots/
+│   └── desktop-list.png
+├── src/
+│   ├── components/
+│   │   ├── ConfirmDialog.jsx
+│   │   ├── Filters.jsx
+│   │   ├── PatientForm.jsx
+│   │   └── PatientList.jsx
+│   ├── App.jsx
+│   ├── api.js
+│   ├── index.css
+│   ├── main.jsx
+│   └── validation.js
+├── .env.example
+├── .gitignore
+├── index.html
+├── package.json
+└── README.md
+```
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and configure:
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `VITE_API_URL` | Base URL of the FastAPI backend | `http://localhost:8000` |
+
+## Steps to Run Locally
+
+1. **Start the backend** (see the [backend README](https://github.com/saintcoder0/Dscribe-backend) for MongoDB Atlas and FastAPI setup).
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Configure environment variables:**
+   ```bash
+   cp .env.example .env
+   # Set VITE_API_URL=http://localhost:8000 (or your deployed backend URL)
+   ```
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:5173`.
+5. **Production build & lint:**
+   ```bash
+   npm run lint
+   npm run build
+   ```
+
+## Screenshot
+
+![Patient Admission Management - Desktop List](screenshots/desktop-list.png)
